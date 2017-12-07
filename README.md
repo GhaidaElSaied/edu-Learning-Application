@@ -8,7 +8,7 @@ We created an application geared towards upper elementary and lower middle schoo
 
 Group Members: Ghaida El-Saied, Omar Beyhum, Steve Rustom, Nick Bajaj, Nick Meier
 
-# Code Implementation in Detail 
+# Code Implementation
 
 For the bee interaction, all the images were HTML elements. The apples were animated using CSS directly, and the bee was animated by using a gif image. The bee uses a basic pathfinding system to move to the tapped location. It tracks a forward vector and a velocity, and it accelerates to a max velocity and stays there until it gets close to its target, where its velocity is slowed using an easing function.
 
