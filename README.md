@@ -1,6 +1,6 @@
 # edu-Learning-Application
 
-Introduction:
+# INTRODUCTION
 
 As part of our final project for our User Interface Design and Development (CS160) course at the University of California, Berkeley, we were tasked with building an application that leverages concepts of cool media. Our assignment was open ended, and our only constraint was that we could not design for ourselves. Using user-centric design principles, we brainstormed, researched, observed, and prototyped, implemented and evaluated our application.
 
@@ -8,7 +8,7 @@ We created an application geared towards upper elementary and lower middle schoo
 
 Group Members: Ghaida El-Saied, Omar Beyhum, Steve Rustom, Nick Bajaj, Nick Meier
 
-Code Implementation in Detail: 
+# Code Implementation in Detail 
 
 For the bee interaction, all the images were HTML elements. The apples were animated using CSS directly, and the bee was animated by using a gif image. The bee uses a basic pathfinding system to move to the tapped location. It tracks a forward vector and a velocity, and it accelerates to a max velocity and stays there until it gets close to its target, where its velocity is slowed using an easing function.
 
