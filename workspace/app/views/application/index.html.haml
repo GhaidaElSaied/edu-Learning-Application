@@ -1,0 +1,28 @@
+.container-fluid.np
+    .col-xs-12.col-sm-6.np
+        .panel.panel-primary
+            .panel-heading 
+                %b
+                    Practicum 5
+                Who is the fairest
+            .panel-body
+                %ul.list-group
+                    %li.list-group-item 
+                        = link_to book_subject_select_path do
+                            %b #1
+                            Subject Select
+                            %span.pull-right.glyphicon.glyphicon-chevron-right
+                    %li.list-group-item 
+                        = link_to book_chapter_select_path do
+                            %b #2
+                            Chapter Select
+                            %span.pull-right.glyphicon.glyphicon-chevron-right
+                    %li.list-group-item 
+                        = link_to book_interaction_path do
+                            %b #2
+                            Interaction
+                            %span.pull-right.glyphicon.glyphicon-chevron-right
+                   
+            .panel-footer
+                CS160 - Intro to UI Design and Development
+   

@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Workspace
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    - controller = params[:controller]
+    - if controller != 'application'
+      = stylesheet_link_tag    controller, media: 'all', 'data-turbolinks-track' => true
+      = javascript_include_tag controller, 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{name:"viewport", content: "user-scalable=no, width=device-width, initial-scale=1"}
+    %script{:src =>"//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"}
+
+  %body
+    = yield

@@ -1,0 +1,286 @@
+<canvas id = "Canvas">
+    Sorry, canvas not supported
+</canvas>
+<img id="bee" src="http://bestanimations.com/Animals/Insects/Bees/bee-animated-gif-36.gif" />
+<img class="tree" src="../assets/treetransparent.png" />
+<img class="flower" id="one" src="../assets/flower.png" />
+<img class="flower" id="two" src="../assets/flower.png" />
+<img class="flower" id="three" src="../assets/flower.png" />
+<img class="flower" id="four" src="../assets/flower.png" />
+<img class="flower" id="five" src="../assets/flower.png" />
+<img class="flower" id="six" src="../assets/flower.png" />
+<img class="flower" id="seven" src="../assets/flower.png" />
+<img class="flower" id="eight" src="../assets/flower.png" />
+<img class="flower" id="nine" src="../assets/flower.png" />
+
+<img class="flower" id="aone" src="../assets/apple.png" />
+<img class="flower" id="atwo" src="../assets/apple.png" />
+<img class="flower" id="athree" src="../assets/apple.png" />
+<img class="flower" id="afour" src="../assets/apple.png" />
+<img class="flower" id="afive" src="../assets/apple.png" />
+<img class="flower" id="asix" src="../assets/apple.png" />
+<img class="flower" id="aseven" src="../assets/apple.png" />
+<img class="flower" id="aeight" src="../assets/apple.png" />
+<img class="flower" id="anine" src="../assets/apple.png" />
+
+<div id="instructions">
+    <p id="pone">Tap to move the bee.</p>
+    <p id="ptwo">Visit a flower to gather pollen.</p>
+    <p id="pthree">With pollen, visit a new flower</br> to pollinate it!</p>
+</div>
+
+<style>
+    body{
+        background-color: #f0f8ff;
+    }
+    
+    canvas{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+    
+    #instructions{
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+    
+    p{
+        position: absolute;
+        font-size: 10vh;
+        font-weight: bold;
+        left: 0;
+        right: 0;
+        margin: auto;
+        z-index: 4;
+        color: black;
+        text-shadow:
+            -2px -2px 0 #ff0,
+            2px -2px 0 #ff0,
+            -2px 2px 0 #ff0,
+            2px 2px 0 #ff0; 
+    }
+    
+    #pone{
+        top: 20%;
+    }
+    
+    #ptwo{
+        top: 40%;
+    }
+    
+    #pthree{
+        top: 60%;
+    }
+    
+    #bee{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: 50px;
+        z-index: 3;
+    }
+    
+    .tree{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 100%;
+        z-index: 0;
+    }
+    
+    .flower{
+        position: absolute;
+        height: 5%;
+        z-index: 1;
+        opacity: 0;
+    }
+    
+    #one{
+        left: 45%;
+        top: 8%;
+    }
+    
+    #two{
+        left: 34%;
+        top: 48%;
+    }
+    
+    #three{
+        left: 41%;
+        top: 41%;
+    }
+    
+    #four{
+        left: 56%;
+        top: 36%;
+    }
+    
+    #five{
+        left: 62%;
+        top: 46%;
+    }
+    
+    #six{
+        left: 37%;
+        top: 25%;
+    }
+    
+    #seven{
+        left: 66%;
+        top: 33%;
+    }
+    
+    #eight{
+        left: 55%;
+        top: 20%;
+    }
+    
+    #nine{
+        left: 29%;
+        top: 42%;
+    }
+    
+    #aone{
+        left: 45%;
+        top: 8%;
+    }
+    
+    #atwo{
+        left: 34%;
+        top: 48%;
+    }
+    
+    #athree{
+        left: 41%;
+        top: 41%;
+    }
+    
+    #afour{
+        left: 56%;
+        top: 36%;
+    }
+    
+    #afive{
+        left: 62%;
+        top: 46%;
+    }
+    
+    #asix{
+        left: 37%;
+        top: 25%;
+    }
+    
+    #aseven{
+        left: 66%;
+        top: 33%;
+    }
+    
+    #aeight{
+        left: 55%;
+        top: 20%;
+    }
+    
+    #anine{
+        left: 29%;
+        top: 42%;
+    }
+</style>
+<script>
+    var canvas;
+    $(function(){
+        console.log("paper", paper)
+        canvas = document.getElementById("Canvas"),
+        paper.setup(canvas)
+        
+        InitializeBee()
+        
+        InitializeTree()
+    });
+    
+ 	
+
+canvas.addEventListener("touchend", function (e) {
+    mX = e.pageX;
+    mY = e.pageY;
+});
+
+canvas.addEventListener("touchstart", function (e) {
+    if(!started){
+        started = true;
+        render();
+    }
+});
+
+canvas.addEventListener("touchleave", function (e) {
+    started = false;
+});
+
+var Ball = function (x, y, radius, color) {
+    this.x = x || 0;
+    this.y = y || 0;
+    this.radius = radius || 10;
+    this.speed = 5;
+    this.color = color || "rgb(255,0,0)";
+
+    this.velX = 0;
+    this.velY = 0;
+}
+
+Ball.prototype.update = function (x, y) {
+    // get the target x and y
+    this.targetX = x;
+    this.targetY = y;
+
+    // We need to get the distance this time around
+    var tx = this.targetX - this.x,
+        ty = this.targetY - this.y,
+        dist = Math.sqrt(tx * tx + ty * ty);
+    
+    /* 
+    * we calculate a velocity for our object this time around
+    * divide the target x and y by the distance and multiply it by our speed
+    * this gives us a constant movement speed.
+    */
+    
+    this.velX = (tx / dist) * this.speed;
+    this.velY = (ty / dist) * this.speed;
+
+    // Stop once we hit our target. This stops the jittery bouncing of the object. 
+    if (dist > this.radius/2) {
+        // add our velocities
+        this.x += this.velX;
+        this.y += this.velY;
+    }
+};
+
+Ball.prototype.render = function () {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    // draw our circle with x and y being the center
+    ctx.arc(this.x-this.radius/2, this.y-this.radius/2, this.radius, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+};
+
+var ball1 = new Ball(width/2, height/2, 10);
+
+function render() {
+    ctx.clearRect(0, 0, width, height);
+    ball1.update(mX, mY);
+    ball1.render();
+    if(started){
+        requestAnimationFrame(render);
+    }
+}
+
+render();
+</script>

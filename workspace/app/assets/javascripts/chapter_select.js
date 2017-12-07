@@ -1,0 +1,5 @@
+$(function(){
+    $(".chapter-img").click(function(event){
+       window.location.href = "https://group2-final-beyhum.c9users.io/book/page" 
+    });
+});

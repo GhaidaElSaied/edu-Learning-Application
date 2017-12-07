@@ -1,0 +1,154 @@
+= javascript_include_tag( 'leaf' )
+= javascript_include_tag( 'color_corrector' )
+
+%script{:src => "https://code.jquery.com/ui/1.10.4/jquery-ui.js"}
+%script{:src =>"//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"}
+
+#container-fluid
+    %canvas#leaf-canvas.col-xs-11
+    #controls.col-xs-12
+        #slider-container
+            #color-slider
+            #slider-icons
+                %img#autumn.slider-icon{:src => "https://group2-final-beyhum.c9users.io/assets/autumn.png"}
+                %img#winter.slider-icon{:src => "https://group2-final-beyhum.c9users.io/assets/winter.png"}
+                %img#spring.slider-icon{:src => "https://group2-final-beyhum.c9users.io/assets/spring.png"}
+                %img#summer.slider-icon{:src => "https://group2-final-beyhum.c9users.io/assets/summer.png"}
+        #photo-capture
+            %button.capture-btn Take a photo of a leaf
+            %input#input-upload{:type => "file", :accept => "image/*", :capture => "camera"}
+        %canvas#mainCanvas
+
+
+    
+:coffeescript
+    $ ->
+        # Initialize paper canvas
+        canvas = document.getElementById("mainCanvas")
+        paper.setup(canvas)
+        path = new paper.Path()
+        path.strokeColor = 'black'
+        point = new paper.Point(0, 50)
+        path.moveTo(point)
+        
+        window.sunLight = 1;
+        PEAK_HEIGHT = 35
+        CYCLE_TIME = 500
+        CYCLE_LENGTH = 100
+        UPDATE_INTERVAL = 10
+        # Already placed first point
+        CURRENT_TIME = UPDATE_INTERVAL
+        NEXT_POINT_X_OFFSET = CYCLE_LENGTH * UPDATE_INTERVAL / CYCLE_TIME
+        
+
+        setInterval(->
+            point = point.add([NEXT_POINT_X_OFFSET, 0])
+            
+            # sunLight is the formula to calculate the amount of sun based on the day of the year and how much light the camera is picking up
+            # lightLevel = 1
+            # sunLight = lightLevel * 0.5 * (Math.cos( ((2 * Math.PI)/365) * (x + 180)) + 1) 
+            
+            # sunLight = (sunLight * lightLevel) Need to make lightLevel the sensor output from phone camera
+            
+            sunLight = 1
+            path.lineTo(point.add([0, window.sunLight * PEAK_HEIGHT * Math.sin(CURRENT_TIME / CYCLE_TIME * 2 * Math.PI)]))
+            
+            CURRENT_TIME += UPDATE_INTERVAL
+            if CURRENT_TIME > CYCLE_TIME
+                CURRENT_TIME -= CYCLE_TIME
+            
+            if (path.bounds.width > paper.view.size.width + NEXT_POINT_X_OFFSET)
+              #console.log("test")
+              path.translate([-NEXT_POINT_X_OFFSET, 0])
+              point = point.subtract([NEXT_POINT_X_OFFSET, 0])
+              path.removeSegment(0)
+        , UPDATE_INTERVAL)
+
+:scss
+    #slider-icons{
+        text-align: left;
+    }
+    
+    .slider-icon{
+        max-width: 10%;
+    }
+    #autumn{
+        margin-right: 17%;
+    }
+    #winter{
+        margin-right: 22%;
+    }
+    #spring{
+        margin-right: 15%;
+    }
+    #summer{
+        margin-left: 0%;
+    }
+    
+    #color-slider{
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#751717+0,ffffff+15,2784d1+33,ffffff+50,1cb52c+66,ffffff+85,e3e57b+100 */
+        background: #751717; /* Old browsers */
+        background: -moz-linear-gradient(left, #751717 0%, #ffffff 15%, #2784d1 33%, #ffffff 50%, #1cb52c 66%, #ffffff 85%, #e3e57b 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, #751717 0%,#ffffff 15%,#2784d1 33%,#ffffff 50%,#1cb52c 66%,#ffffff 85%,#e3e57b 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right, #751717 0%,#ffffff 15%,#2784d1 33%,#ffffff 50%,#1cb52c 66%,#ffffff 85%,#e3e57b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#751717', endColorstr='#e3e57b',GradientType=1 ); /* IE6-9 */
+    }
+    
+    #container-fluid{
+        padding: 0px;
+    }
+    
+    #controls{
+        text-align: center;
+        box-shadow: 0 -6px 10px rgba(0,0,0,0.19), 0 -6px 12px rgba(0,0,0,0.23);
+        z-index: 2;
+        width: 100%;
+        background-color: #f7f7f7;
+        
+
+    }
+    #controls > *{
+        margin-top: 10px;
+    }
+    
+    #photo-capture {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+    
+    .capture-btn {
+      border: 2px solid #44cc88;
+      color: #44cc88;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    #input-upload {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+    
+    #leaf-canvas{
+        width: 100%;
+        background-color: #ededed
+
+    }
+    
+    .hidden{
+        display: none;
+    }
+    
+    #mainCanvas{
+        width: 100%;
+        height: 100px;
+        left: 0;
+        border: 2px solid #44cc88;
+
+    }

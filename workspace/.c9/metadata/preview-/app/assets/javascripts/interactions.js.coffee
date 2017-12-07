@@ -1,0 +1,1 @@
+{"filter":false,"title":"[P] /app/assets/javascripts/interactions.js.coffee","undoManager":{"mark":-1,"position":-1,"stack":[]},"preview":{"path":"/app/assets/javascripts/interactions.js.coffee","previewer":"preview.browser"},"timestamp":1502163421521,"hash":"da39a3ee5e6b4b0d3255bfef95601890afd80709"}
