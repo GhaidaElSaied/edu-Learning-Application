@@ -1,5 +1,7 @@
 # edu-Learning-Application
 
+Medium Article: https://medium.com/@ghaidae/by-ghaida-el-saied-nick-meier-estephan-rustom-omar-beyhum-and-nick-bajaj-773846f4ac8e
+
 # INTRODUCTION
 
 As part of our final project for our User Interface Design and Development (CS160) course at the University of California, Berkeley, we were tasked with building an application that leverages concepts of cool media. Our assignment was open ended, and our only constraint was that we could not design for ourselves. Using user-centric design principles, we brainstormed, researched, observed, and prototyped, implemented and evaluated our application.
