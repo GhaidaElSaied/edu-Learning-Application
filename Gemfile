@@ -49,7 +49,7 @@ gem 'underscore-rails'
 gem 'normalize-rails'
 
 # VIGNETTE LIBRARIES
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'jquery-ui-rails'
 gem 'hammerjs-rails'
 gem "twitter"
